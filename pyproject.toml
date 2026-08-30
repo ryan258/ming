@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ming-agent-harness"
+version = "0.2.0"
+description = "A local-first, free-route-aware JIT specialist harness for OpenRouter"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{name = "Ryan Johnson"}]
+dependencies = []
+
+[project.optional-dependencies]
+ui = ["streamlit>=1.52"]
+dev = ["pytest>=8.3", "ruff>=0.9"]
+
+[project.scripts]
+ming = "ming.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ming", "engine", "codex", "evals"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
