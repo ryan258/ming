@@ -1,0 +1,16 @@
+{
+  "api_request_will_run": false,
+  "aspect_ratio": "16:9",
+  "cost_class": "paid-cheap",
+  "created_at": "2026-08-29T00:00:00+00:00",
+  "estimated_cost_usd": 0.015,
+  "human_review_required": true,
+  "image_count": 1,
+  "iteration_id": "image-preview-example",
+  "iteration_kind": "image_preview",
+  "iteration_path": "outputs/iterations/image-preview-example.json",
+  "model": "krea/krea-2-medium-turbo",
+  "need": "A calm hero image for a local-first operations dashboard",
+  "prompt": "Create one finished image that solves the communication need below.\n\nNEED: A calm hero image for a local-first operations dashboard\nUSE: website hero\nAUDIENCE: technical operators\nART DIRECTION: dark editorial technology illustration with quiet green accents\nCOMPOSITION: Design specifically for a 16:9 frame. Make the primary subject and visual hierarchy immediately legible at thumbnail size.\nTEXT: Do not include words, letters, logos, captions, watermarks, or interface chrome.\nAVOID: robots, glowing brains, stock photography, text, visual clutter\n\nReturn a cohesive final image, not a mood board, contact sheet, split screen, or mockup.",
+  "resolution": "1K"
+}

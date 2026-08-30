@@ -1,0 +1,14 @@
+{
+  "capabilities": [
+    "data.structured-summary",
+    "web.json-api",
+    "devops.test-runner"
+  ],
+  "human_review_required": true,
+  "mode": "offline",
+  "note": "Deterministic orchestration artifact; no model inference was performed.",
+  "objective": "Create a deterministic JSON summary",
+  "role": "Structured Data Specialist",
+  "specialist_id": "815a00f9e01c-01-structured-data-specialist",
+  "success_criteria": []
+}

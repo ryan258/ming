@@ -1,0 +1,26 @@
+[
+  {
+    "id": "security-retrieval",
+    "brief": "Review a Python file handler for path traversal and secret exposure",
+    "expected_capability": "security.python-review",
+    "output_format": "text"
+  },
+  {
+    "id": "api-retrieval",
+    "brief": "Design a tested HTTP JSON API with explicit request schema",
+    "expected_capability": "web.json-api",
+    "output_format": "text"
+  },
+  {
+    "id": "json-shape",
+    "brief": "Extract this material into a deterministic JSON summary",
+    "expected_capability": "data.structured-summary",
+    "output_format": "json"
+  },
+  {
+    "id": "image-artist-retrieval",
+    "brief": "Create a hero image illustration for a technical dashboard",
+    "expected_capability": "creative.image-generation",
+    "output_format": "text"
+  }
+]
