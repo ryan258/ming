@@ -126,14 +126,17 @@ The named free model roster is configuration, not a promise: free endpoints rota
 the role-specific preference chain and always ends at `openrouter/free`. Rate limiting is local and
 conservative; OpenRouter still enforces account-level limits.
 
-See [docs/PROJECT_BIBLE.md](docs/PROJECT_BIBLE.md) for scope and
-[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for implementation boundaries. The saved
+See [docs/PROJECT_BIBLE.md](docs/PROJECT_BIBLE.md) for scope,
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for implementation boundaries, and
+[ROADMAP.md](ROADMAP.md) for milestone progress. The saved
 [first output](examples/first-output.json) is the JSON deliverable from a verified offline run; its
 labels make clear that it proves orchestration plumbing rather than model inference.
 
 ## Verification
 
 ```sh
+uv run pytest
+# or
 python3 -m unittest discover -s tests -v
 python3 -m ming eval
 python3 -m ming run "Create a deterministic JSON summary" --offline --json

@@ -51,3 +51,10 @@ A capability card should take 10–20 minutes to author. An offline run should f
 live run is intentionally limited to one planning request plus at most three specialist requests,
 subject to free-tier availability and account limits. An image unit is one dry-run art brief or one
 authorized 1K image plus its provenance manifest.
+
+## Project Documents
+
+- [README.md](../README.md): Operational quick start and command overview.
+- [ROADMAP.md](../ROADMAP.md): Milestones, upcoming development phases, and non-goals.
+- [ARCHITECTURE.md](ARCHITECTURE.md): Runtime flows, module map, and trust boundaries.
+- [CRAFT_RULES.md](CRAFT_RULES.md): Operating constraints and design principles.

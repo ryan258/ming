@@ -1,6 +1,32 @@
 # Architecture and Trust Boundaries
 
-## Runtime flow
+## Component Layout & Module Map
+
+Ming is organized into bounded subsystems with clear separation of responsibilities:
+
+- **`engine/`**: Core runtime, orchestration, and boundary enforcement.
+  - `config.py`: Environment parsing, workspace boundary checks, model pricing, and free-only route enforcement.
+  - `contracts.py`: Strongly-typed dataclasses for cards, specialists, tasks, events, validations, and telemetry records.
+  - `bus.py`: Async in-memory fan-out event bus with queue saturation safeguards.
+  - `validation.py`: Deterministic shape, JSON syntax, required key, and substring checks.
+  - `llm.py`: OpenRouter client enforcing free text routes, model preference fallback chains, and sanitized error handling.
+  - `telemetry.py`: Local SQLite store (`outputs/logs/telemetry.db`) tracking runs, events, calls, and image costs.
+  - `jit_spawner.py`: Ephemeral specialist spawner creating bounded in-memory agents.
+  - `image_generator.py`: Communication-need art brief composer, cost authorizer, and raster artifact generator with JSON provenance sidecars.
+  - `orchestrator.py`: Solo orchestrator coordinating retrieval, planning, execution, validation, and iteration snapshots.
+  - `output_store.py`: Workspace-confined atomic writer for run and image iteration JSONs.
+- **`codex/`**: Capability indexer and curated Markdown cards.
+  - `indexer.py`: SQLite FTS5 indexer with punctuation sanitization and BM25 ranking.
+  - `tools/`: Modular Markdown capability cards across creative, data, devops, security, and web domains.
+- **`ming/`**: Primary CLI interface and package entrypoints.
+  - `cli.py`: Subcommand implementations (`doctor`, `index`, `search`, `run`, `image`, `models`, `eval`).
+- **`ui/`**: Optional operations console.
+  - `app.py`: Streamlit interface providing codex browsing, orchestrator runs, image workbench, and telemetry auditing.
+- **`evals/`**: Deterministic offline fixtures.
+  - `runner.py`: Offline evaluation runner checking capability retrieval and validation criteria.
+  - `test_cases.json`: Grounded regression cases for offline validation.
+
+## Runtime Flow
 
 1. The CLI/UI loads configuration. Process environment wins over `.env`.
 2. The orchestrator searches the FTS5 codex using terms from the brief.
@@ -10,7 +36,7 @@
 6. Validators grade explicit success criteria and output-shape requirements.
 7. Telemetry stores run/call facts locally. The final report names the actual response model.
 
-## Image-artist flow
+## Image-Artist Flow
 
 1. The operator supplies a need, use, audience, art direction, exclusions, and aspect ratio.
 2. Ming deterministically composes a bounded art brief. `--dry-run` stops here without a key or API.
@@ -23,7 +49,12 @@
    either write fails, a fresh run is rolled back and `--overwrite` restores the previous files.
 7. Image telemetry records the actual model, observed cost, digest, latency, and output path.
 
-## Security boundaries
+## Dual Interface Architecture
+
+- **CLI (`ming/cli.py`)**: Designed for scriptability, continuous integration, and rapid operator interaction. Outputs can be human-readable formatted text or structured JSON (`--json`).
+- **Streamlit Dashboard (`ui/app.py`)**: Optional visual operations console reading directly from the same engine, codex, and telemetry store without duplicating data or business logic.
+
+## Security Boundaries
 
 - The official `https://openrouter.ai/api/v1` origin is pinned by default. Custom origins require the
   explicit `MING_ALLOW_CUSTOM_BASE_URL=true` opt-in.
@@ -41,7 +72,7 @@
   tools root.
 - The application does not stage, commit, push, deploy, publish, or call arbitrary local tools.
 
-## Prototype limitations
+## Prototype Limitations
 
 The planner and validators constrain common output failures; they do not establish correctness or
 safety. Model output requires human review. Free model availability and quality are outside Ming's
